@@ -1,0 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap");
+
+$blue: #080497;
+$off-white: #f8f8ff;
+$light-blue: #3f5fac;
+$font: 'Work Sans', sans-serif;
+$h1 : 5em;
+$h2: 1.8em;
+
+@keyframes highlight {
+    from {color: $blue}
+    to {color: orange}
+}
+
+@keyframes expand {
+    from {clip-path: polygon(60% 65%, 60% 35%, 70% 25%, 80% 35%, 80% 65%, 70% 75%);}
+    to {clip-path: polygon(0 100%, 0 0, 50% 0, 100% 0, 100% 100%, 50% 100%)}
+}
+
+@keyframes fade-in {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+
+@mixin default-transition($property, $duration) {
+    transition: $property $duration ease;
+}
+
+@mixin default-animation($name, $duration, $iteration, $delay) {
+    animation-name: $name;
+    animation-duration: $duration;
+    animation-iteration: $iteration;
+    animation-delay: $delay;
+    animation-fill-mode: forwards;
+}
+
+@mixin hexagon-size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin menu-position() {
+    position: absolute;
+    right: 20px;
+    top: 25px;
+}
+
+@mixin menu-transition() {
+    transition: transform 0.8s cubic-bezier(0.075, 0.82, 0.165, 1), 
+            opacity 0.8s ease;
+}
+
+@mixin border-property($border-width, $border-color) {
+    border-width: $border-width;
+    border-style: solid;
+    border-color: $border-color;
+}
+
+/* company logo position and dimension */
+#logo {
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 20px);
+    opacity: 1;
+    @include default-transition(opacity, 0.5s);
+    z-index: 20;
+}
+
+/* checkbox for menu implementation */
+#toggle {
+    display: none;
+}
+
+#toggle:checked {
+    & ~ #logo {
+        opacity: 0;
+        @include default-transition(opacity, 0.5s);
+    }
+
+    & ~ .container {
+        opacity: 0;
+        @include default-transition(opacity, 0.5s);
+    }
+
+    & ~ .honeycomb {
+      opacity: 0;
+      @include default-transition(opacity, 0.5s);
+    }
+
+    & ~ .header {
+        transform: none;
+        @include default-transition(transform, 0.8s);
+    }
+
+    .page {
+        padding: 20px 0;
+    }
+
+    & ~ label #menu {
+        background-color: $off-white;
+        @include hexagon-size(28px, 2px);
+        @include menu-position();
+        transform: rotate(45deg);
+        @include menu-transition();
+    }
+
+    & ~ label #menu:after {
+        content: '';
+        background-color: $off-white;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transform: rotate(90deg);
+    }
+
+    & ~ label #menu:before {
+        opacity: 0;
+    }
+
+    & ~ .info-wrapper {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    & ~ .side-nav {
+        transform: none;
+        transition: transform 0.8s ease;
+    }
+}
+
+.header {
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0;
+    list-style: none;
+    transform: translate(100%, -100%) scale(0, 0);
+    @include default-transition(transform, 0.8s);
+}
+
+/* header content styling */
+.header a, .header li {
+    position: relative;
+    z-index: 3;
+    color: orange;
+    font-family: $font;
+    font-size: 25px;
+    font-weight: bold !important;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    line-height: 4em;
+    @include default-transition(color, 0.5s);
+}
+
+/* hexagon shaper */
+.hexagon {
+    @include hexagon-size(32px, 18px);
+    @include border-property(0 1px 0 1px, $off-white);
+    cursor: pointer;
+}
+
+.hexagon:before, .hexagon:after {
+    content: '';
+    width: 98%;
+    position: absolute;
+    @include border-property(0 1px 0 1px, $off-white);
+}
+
+/* hexagon menu styling */
+#menu {
+    @include menu-position();
+    transform: rotate(180deg);
+    @include menu-transition();
+    z-index: 20;
+}
+
+#menu:hover {
+    filter: drop-shadow(0 0 5px black);
+}
+
+.honeycomb-cell-label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $off-white;
+    font-family: $font;
+    font-weight: bold;
+    text-transform: uppercase;
+    hyphens: auto;
+    word-break: break-word;
+    @include default-transition(all, 350ms);
+}
+
+.honeycomb-cell:before {
+    background-color: $off-white;
+    transform: scale(1.0555);
+    @include default-transition(background-color, 350ms);
+}
+
+.honeycomb-cell:after {
+    background-color: $light-blue;
+    opacity: 0.8;
+    @include default-transition(opacity, 350ms);
+}
+
+@media only screen and (min-width: 1300px) {
+    #menu {
+        opacity: 0;
+    }
+
+    /* underline animation on page links */
+    .page:after {
+        content: '';
+        width: 0;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        border-bottom: 2px solid orange;
+        @include default-transition(all, 0.2s);
+    }
+}

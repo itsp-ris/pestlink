@@ -1,0 +1,373 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap");
+
+$font: 'Work Sans', sans-serif;
+$blue: #080497;
+$light-blue: #3f5fac;
+$off-white: #f8f8ff;
+$h1: 5em;
+$h2: 1.8em;
+
+@mixin default-transition($property, $duration) {
+    transition: $property $duration ease;
+}
+
+.info-wrapper {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.side-nav {
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0;
+    transform: translate(100%, -100%) scale(0, 0);
+    @include default-transition(transform, 0.8s);
+}
+
+.side-nav ul {
+    list-style: none;
+}
+
+.side-nav li {
+    position: relative;
+    z-index: 3;
+    color: orange;
+    font-family: $font;
+    font-size: 14px;
+    font-weight: bold !important;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    line-height: 4em;
+    @include default-transition(color, 0.5s);
+}
+
+.side-nav li:hover {
+    color: $off-white;
+    cursor: pointer;
+}
+
+.NavLink:visited {
+    text-decoration: none;
+    color: orange;
+}
+
+.bg {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    object-fit: cover;
+    filter: drop-shadow(0 0 10px black);
+    @include default-transition(opacity, 1s);
+}
+
+.bg.hide {
+
+    & ~ .details .grid-wrapper.active {
+        transform: translate(0);
+        @include default-transition(transform, 1s);
+    }
+
+    & ~ #show:after {
+        transform: rotate(-135deg);
+        @include default-transition(transform, 0.8s);
+    }
+}
+
+.details {
+    width: 100%;
+    height: 270%;
+    background-color: white;
+    position: relative;
+    top: 60%;
+    z-index: 0;
+}
+
+.desc-wrapper {
+    width: 100%;
+    transform: translate(100%);
+    padding: 10px;
+    @include default-transition(transform, 1s);
+}
+
+.desc-wrapper.active {
+    transform: translate(0);
+    @include default-transition(transform, 1s);
+}
+
+.desc-wrapper h1, .desc-wrapper p {
+    color: $blue;
+    font-family: $font;
+    text-align: right;
+}
+
+.desc-wrapper h1 {
+    transform: scale(0.7);
+    font-size: $h1;
+}
+ #show {
+    width: 60px;
+    height: 60px;
+    background-color: $light-blue;
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, 50%);
+    z-index: 2;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:after {
+        content: "";
+        width: 60px;
+        height: 60px;
+        background-image: url("https://svg-clipart.com/svg/sign/kDyFk8m-white-plus-vector.svg"); 
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 30px;
+        position: absolute;
+        left: 0;
+        border-radius: 50%;
+        @include default-transition(transform, 0.8s);
+    }
+
+    &:hover {
+        background-color: lighten($light-blue, 5%);
+    }
+}
+
+.grid-wrapper {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    transform: translate(100%);
+    display: grid;
+    grid-template-columns: 100%;
+    padding: 10px;
+    @include default-transition(transform, 1s);
+}
+
+.grid-wrapper h2, .grid-wrapper p, .grid-wrapper li {
+    color: $blue;
+    font-family: $font;
+}
+
+.grid-wrapper h2 {
+    font-size: $h2;
+}
+
+.action-button {
+    background-color: orange;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    cursor: pointer;
+
+    span {
+        color: $off-white;
+        font-family: $font;
+        font-size: 16px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    span:nth-child(2) {
+        display: none;
+    }
+
+    & ~ form {
+        display: none;
+
+        p, input, input::placeholder, textarea {
+            color: $light-blue;
+        }
+
+        input[type="submit"] {
+            color: $off-white;
+        }
+    }
+}
+
+.action-button.transform {
+    span:nth-child(1) {
+        display: none;
+    }
+
+    span:nth-child(2) {
+        display: block;
+        cursor: pointer;
+    }
+
+    & ~ form {
+        width: 90%;
+        height: 80%;
+        background: none;
+        backdrop-filter: none;
+        display: block;
+        border: none;
+        box-shadow: none;
+    }
+}
+
+@media only screen and (min-width: 1300px) {
+    .info-wrapper {
+        overflow-y: hidden;
+    }
+
+    .side-nav {
+        width: 15%;
+        height: 100vh;
+        background: none;
+        position: fixed;
+        display: block;
+        padding: 0;
+        transform: none;
+        transition: none;
+    }
+    
+    .side-nav ul {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .side-nav li {
+        color: $blue;
+        font-weight: normal !important;
+        transition: none;
+    }
+
+    .NavLink:visited {
+        color: $blue;
+    }
+
+    .current {
+        font-weight: bold;
+    }
+
+    .bg {
+        width: auto;
+        max-height: 50%;
+    }
+
+    .bg.hide {
+        opacity: 0;
+        @include default-transition(opacity, 1s);
+    }
+
+    .details {
+        width: 70%;
+        height: 100vh;
+        background: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+    }
+
+    .desc-wrapper {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        transform: translate(100%, -50%);
+        padding: 100px;
+    }
+
+    .desc-wrapper.active {
+        transform: translate(0, -50%);
+    }
+
+    .desc-wrapper h1, .desc-wrapper p {
+        transform: none;
+        color: $off-white;
+    }
+
+    .grid-wrapper {
+        width: 100%;
+        height: 100%;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "treatment treatment"
+            "detection habitat";
+        padding: 20px;
+    }
+
+    .grid-wrapper h2, .grid-wrapper p, .grid-wrapper li {
+        color: $off-white;
+    }
+
+    .g1 {
+        grid-area: treatment;
+
+        ul {
+            width: 75%;
+            position: absolute;
+        }
+    }
+
+    .g2 {
+        grid-area: detection;
+    }
+
+    .g3 {
+        grid-area: habitat;
+    }
+
+    .action-button {
+        width: 20%;
+        height: 40%;
+        position: absolute;
+        top: 50px;
+        right: 10px;
+        padding: 0;
+        transition: all 0.8s ease;
+
+        span {
+            font-size: 25px;
+        }
+
+        & ~ form {
+            p, input, input::placeholder, textarea {
+                color: $off-white;
+            }
+        }
+    }
+
+    .action-button.transform {
+        width: 90%;
+        height: 90%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        top: 50%;
+        right: 50%;
+        transform: translate(50%, -50%);
+        transition: all 0.8s ease;
+
+        span:nth-child(2) {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            color: $off-white;
+            cursor: pointer;
+        }
+
+        & ~ form {
+            top: 50%;
+            right: 5%;
+            transform: translateY(-50%);
+        }
+    }
+}

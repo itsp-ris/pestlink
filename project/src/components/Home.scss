@@ -1,0 +1,415 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap");
+
+$blue: #080497;
+$off-white: #f8f8ff;
+$light-blue: #3f5fac;
+$font: 'Work Sans', sans-serif;
+$h1 : 5em;
+$h2: 1.8em;
+
+.header a:hover, .header li:hover {
+    color: $off-white;
+    cursor: pointer;
+}
+
+.hexagon:before {
+    height: 102.5%;
+    transform: rotate(60deg);
+}
+
+.hexagon:after {
+    height: 102%;
+    transform: rotate(-60deg);
+}
+
+.container {
+    width: 100%;
+    position: absolute;
+    top: 120px;
+    overflow: hidden;
+}
+
+.section {
+    width: 100%;
+    min-height: calc(100vh - 120px);
+    position: relative;
+}
+
+.section > img {
+    height: calc(100vh - 120px);
+    position: absolute;
+    right: 0;
+    transform: translate(100%);
+    object-fit: cover;
+}
+
+.section[id="About"] {
+    & > img {
+        width: 100%;
+    }
+}
+
+// .section[id="Services"] {
+//     & > img {
+//         height: 50%;
+//         top: 0;
+//     } 
+
+//     & .content {
+//         right: 0;
+//         transform: translate(100%, -50%);
+//     }
+// }
+
+.section[id="Policy"] {
+    & > img {
+        width: 50%;
+    }
+
+    & .content {
+        height: 100%;
+    }
+}
+
+.content {
+    width: 50%;
+    background-color: $off-white;
+    position: absolute;
+    top: 50%;
+    transform: translate(-100%, -50%);
+    padding: 50px 80px;
+}
+
+.content h1, .content h2, .content p, .content a {
+    position: relative;
+    transform: scale(0.8);
+    z-index: 2;
+    color: $blue;
+    font-family: $font;
+    text-align: justify;
+}
+
+.highlight {
+    animation: highlight 3s linear 0s 1 reverse;
+}
+
+.honeycomb {
+    width: 100%;
+    transform: translate(-100%); //
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+    list-style: none;
+}
+
+.honeycomb-cell {
+    width: 200px;
+    height: 114px;
+    position: relative;
+    top: 100px;
+    margin: 60px 10px 10px;
+    z-index: 1;
+    flex: 0 1 200px;
+    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.honeycomb-cell img {
+    object-fit: cover;
+    object-position: top;
+    filter: grayscale(100%);
+}
+
+.honeycomb-cell:hover img {
+    filter: grayscale(0%);
+}
+
+.honeycomb-cell:before, .honeycomb-cell:after {
+    content: '';
+}
+
+.honeycomb-cell:before, .honeycomb-cell:after, .honeycomb-cell img {
+    width: 100%;
+    height: 200%;
+    position: absolute;
+    top: -50%;
+    z-index: -1;
+    display: block;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.honeycomb-cell:hover:before {
+    background-color: orange;
+}
+
+.honeycomb-cell:hover .honeycomb-cell-label, .honeycomb-cell:hover:after {
+    opacity: 0;
+}
+
+.section[id="Services"] {
+    .honeycomb-cell {
+        transform-style: preserve-3d;
+        cursor: default;
+    }
+
+    .honeycomb-cell img {
+        filter: grayscale(0%);
+        transition: all 350ms;
+    }
+
+    .honeycomb-cell:hover img {
+        transform: perspective(1500px) translateZ(150px);
+        clip-path: none;
+        filter: grayscale(100%);
+    }
+
+    .honeycomb-cell:after, .honeycomb-cell-label {
+        opacity: 0;
+    }
+
+    .honeycomb-cell:hover:before {
+        background-color: $off-white;
+    }
+
+    .honeycomb-cell:hover:after {
+        opacity: 0.8;
+    }
+
+    .honeycomb-cell:hover .honeycomb-cell-label {
+        transform: perspective(1000px) translateZ(150px);
+        opacity: 1;
+    }
+
+}
+
+.placeholder {
+    opacity: 0;
+}
+
+.table {
+    width: 100%;
+    transform: translate(-100%); //
+    display: flex;
+    padding: 20px;
+}
+
+.table h2, .table p {
+    color: orange;
+    font-family: $font;
+}
+
+.table h2 {
+    transform: scale(0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.table p {
+    line-height: 1.5em;
+}
+
+@media only screen and (min-width: 1300px) {
+    /* company logo position and dimension */
+    #logo {
+        position: fixed;
+        left: 20px;
+        transform: translateY(20px);
+    }
+
+    /* navigation bar */
+    .header {
+        background-color: transparent;
+        min-height: 50px;
+        position: fixed;
+        display: inline-block;
+        text-align: right;
+        padding: 0;
+        transform: none;
+    }
+
+    /* header content styling */
+    .header li, .header a, .header a:hover {
+        color: orange;
+        font-family: $font;
+        font-size: 12px;
+        font-weight: normal !important;
+        padding: 20px 0;
+        text-transform: uppercase;
+        line-height: normal;
+    }
+
+    .header a[href="#Contact"] {
+        background-color: orange;
+        color: $blue;
+        padding: 20px;
+    }
+
+    .page {
+        display: inline-block;
+        position: relative;
+        margin-top: 20px;
+        margin-right: 50px;
+    }
+
+    .page:hover:after {
+        width: 100%;
+    }
+
+    .section {
+        height: calc(100vh - 120px);
+    }
+
+    .section[id="About"] {
+        & > .content {
+            height: 80%;
+        }
+    }
+
+    // .section[id="Services"] {
+    //     & > img {
+    //         max-width: 50%;
+    //         height: 100%;
+    //         left: 25%;
+    //         transform: translate(-50%);
+    //     } 
+
+    //     & > .content {
+    //         height: 100%;
+    //     }
+    // }
+
+    .content h1, .content h2, .content p, .content a {
+        transform: none;
+    }
+
+    .content h1 {
+        font-size: $h1;
+    }
+    
+    .content h2 {
+        font-size: $h2;
+    }
+
+    .honeycomb-cell:nth-child(8n + 6) {
+        margin-left: calc(50% - 470px);
+    }
+
+    .honeycomb-cell:nth-child(8n + 8) {
+        margin-right: calc(50% - 470px);
+    }
+
+    .table {
+        width: 50%;
+        flex-direction: column;
+    }
+
+    .table h2, .table p {
+        transform: none;
+        color: $light-blue;
+    }
+
+    .table h2 {
+        font-size: $h2;
+    }
+}
+
+@media (min-width: 1100px) and (max-width: 1299px) {
+    .honeycomb-cell:nth-child(7n + 5) {
+        margin-left: calc(50% - 330px);
+    }
+
+    .honeycomb-cell:nth-child(7n + 7), 
+    .honeycomb-cell:nth-child(7n + 5):nth-last-child(2) {
+        margin-right: calc(50% - 330px);
+    }
+}
+
+@media (max-width: 1100px) {
+    .honeycomb-cell:nth-child(5n + 4) {
+        margin-left: calc(50% - 230px);
+    }
+
+    .honeycomb-cell:nth-child(5n + 5) {
+        margin-right: calc(50% - 230px);
+    }
+}
+
+@media (max-width: 810px) {
+    .section[id="Policy"] {
+        & .content {
+            padding: 10px;
+        }
+    }
+    
+    .honeycomb-cell:nth-child(3n) {
+        margin-right: calc(50% - 110px);
+        margin-left: calc(50% - 110px);
+    }
+}
+
+@media (max-width: 560px) {
+    #logo {
+        left: 20px;
+        transform: translateY(20px) scale(0.8);
+    }
+
+    #menu {
+        transform: rotate(180deg) scale(0.8);
+    }
+
+    .content {
+        width: auto;
+        transform: translate(-100%);
+        padding: 10px;
+    }
+
+    .section[id="About"] {
+        & > .content {
+            bottom: 0;
+        }
+    }
+
+    // .section[id="Services"] {
+    //     margin-top: 50px;
+    //     margin-bottom: 50px;
+
+    //     & > img {
+    //         right: 50%;
+    //         transform: translate(50%);
+    //     }
+
+    //     & > .content {
+    //         width: 100%;
+    //         height: 50%;
+    //         transform: translate(100%);
+    //         display: flex;
+    //     }
+    // }
+
+    .section[id="Policy"] {
+        & > img {
+            display: none;
+        }
+
+        & > .content {
+            height: auto;
+            top: 0;
+        }
+    }
+
+    .honeycomb {
+        transform: translate(-100%) scale(0.9);
+    }
+
+    .honeycomb-cell {
+        transform: scale(0.9);
+        margin: 60px 0;
+    }
+
+    .table {
+        flex-direction: column;
+        text-align: center;
+    }
+}

@@ -1,0 +1,53 @@
+@keyframes fadeout {
+    from {opacity: 1;}
+    to {
+        opacity: 0;
+        z-index:-2;
+    }
+}
+
+@keyframes fadeblur {
+    0% {
+        opacity: 1;
+        filter: blur(.05em);
+    }
+    80% {
+        filter: blur(.188em);
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.disintegrate-wrapper {
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// .disintegrate-wrapper div {
+//     display: flex;
+// }
+
+.dust {
+    position: absolute;
+    z-index: 1;
+    filter: blur(.05em);
+}
+
+.quick-fade {
+    animation: fadeout 1.5s linear forwards;
+}
+
+.fade {
+    animation: fadeout 1s linear 3s forwards;
+}
+
+.blur {
+    animation: fadeblur 2s ease-in forwards;
+}
+

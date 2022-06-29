@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap");
+
+$blue: #080497;
+$off-white: #f8f8ff;
+$light-blue: #3f5fac;
+$font: 'Work Sans', sans-serif;
+$h1 : 5em;
+$h2: 1.8em;
+
+form {
+    width: 90%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    margin: 0 auto;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+form input, form textarea {
+    background-color: rgba(255, 255, 255, 0.2);
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+form p, form input, form input::placeholder, form textarea {
+    color: orange;
+    font-family: $font;
+}
+
+form input::placeholder, form textarea {
+    padding: 10px;
+}
+
+form input[type="submit"] {
+    background: orange;
+    font-family: $font;
+    color: $off-white;
+    padding: 20px;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 1300px) {
+    form {
+        width: 50%;
+        position: absolute;
+        right: 10%;
+    }
+
+    form p {
+        color: $off-white;
+        font-size: 25px;
+    }
+
+    form input, form input::placeholder, form textarea {
+        font-size: 16px;
+    }
+}

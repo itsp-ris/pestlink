@@ -1,0 +1,26 @@
+
+* {
+	box-sizing: border-box
+}
+
+/* page body position, dimension and visual */
+html, body {
+	width: 100vw;
+	height: 100vh;
+	background-image: linear-gradient(to right, white, white 0 70%,  #080497 70% 100%,  #080497);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	margin: 0;
+	overflow-x: hidden;
+}
+
+@media only screen and (min-width: 1300px) {
+	html, body {
+		background-image: linear-gradient(to right, white, white 0 30%,  #080497 30% 100%,  #080497);
+	}
+}
+
+/* page body links styling */
+a, a:visited {
+	text-decoration: none;
+}
